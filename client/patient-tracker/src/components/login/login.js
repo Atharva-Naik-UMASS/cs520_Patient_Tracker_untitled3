@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 
 import Button from "react-bootstrap/Button";
 
+import { Navigate, useNavigate } from "react-router-dom";
+
 import "./Login.css";
 
 export default function Login() {
@@ -12,14 +14,17 @@ export default function Login() {
 
   const [password, setPassword] = useState("");
 
+  // const navigate = useNavigate();
+
   function validateForm() {
 
     return email.length > 0 && password.length > 0;
 
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event,page) {
     event.preventDefault();
+    window.location.replace(page)
   }
 
   return (
@@ -64,21 +69,22 @@ export default function Login() {
 
         </Form.Group>
         <br/>
-        <button class="button-65"  block size="lg" type="submit" variant="primary" disabled={!validateForm()}>
+        {/* <Link to="/signup" className="btn btn-primary">Sign up</Link> */}
+        <button class="main-buttons" block size="lg" type="submit" variant="primary" onClick={e => handleSubmit(e,"/doctor_dashboard")} disabled={!validateForm()} >
 
-          Login as Employee
+          Login as Doctor
 
         </button>
 
         <br/>
         <br/>
-        <button class="button-65" variant="text" block size="lg" type="submit" disabled={!validateForm()}>
+        <button class="main-buttons" block size="lg" type="submit" variant="primary"  onClick={e => handleSubmit(e,"/patient_dashboard")} disabled={!validateForm()}>
 
           Login as Patient
 
         </button>
 
-        <h6>Not Registered Yet? <b>Create an account</b></h6>
+        <h6>Not Registered Yet? <a href="/register">Create an account</a></h6>
 
       </Form>
 
