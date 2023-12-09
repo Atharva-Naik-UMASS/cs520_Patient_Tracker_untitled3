@@ -3,7 +3,7 @@ import Login from '../src/components/login/login'
 import Doc_Dash from './components/dashboard/doctor_dashboard'
 import Pat_Dash from './components/dashboard/patient_dashboard'
 import Pat_Register from './components/register/register'
-
+import Create_Appointment from './components/appointment-booking/schedule_appointment'
 import {
     BrowserRouter as Router,
     Routes,
@@ -32,6 +32,10 @@ export default function App() {
                     <Route
                         path="/register"
                         element={<Pat_Register />}
+                    />
+                    <Route
+                        path="/create_appointment"
+                        element={<Create_Appointment />}
                     />
                     <Route
                         path="*"

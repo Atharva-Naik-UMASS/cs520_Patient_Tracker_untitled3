@@ -10,51 +10,74 @@ const RegistrationForm = () => {
     email: '',
     address: '',
     emergencyContact: '',
-    age: '',
     password:'',
     conf_pass:''
   });
-
+  var hist = '';
   const handleChange = (e) => {
     const { name, value } = e.target;
-    var flag = 0
-    if(value == "") {
-      alert(name+" cannot be empty");
-      flag = 1
-    }
-    if(name === "phoneNumber" || name === "emergencyContact"){
-      const phno = validator.isMobilePhone(value);
-      if(!phno){
-        alert("Please enter a valid Phone Number");
-        flag = 1;
-      }
-      else if (name === "password"){
-        const pass = validator.isStrongPassword(value)
-        alert(pass)
-        if(!pass){
-          alert("Password not strong enough");
-          flag = 1;
-        }
-      }
-      else if (name === "conf_pass"){
-        if(value !== userData.password){
-          alert("Passwords do not match");
-          flag = 1;
-        }
-      }
-    }
-    if(flag){
-      setUserData({...userData,[name]:""});
-    }
     setUserData({ ...userData, [name]: value });
   };
+  // var flag = 0
 
-  const handleSubmit = (e) => {
+  // const handleBlur = (e) => {
+     
+  // }
+
+  const validateForm = (e) => {
+    for (var i in userData){
+      if (userData[i.toString()] === '' ){
+        alert(i+" Cannot be left Empty")
+        return 1;
+      }
+      if (i === "phoneNumber" || i === "emergencyContact") {
+        if (!validator.isMobilePhone(userData[i.toString()])) {
+          setUserData({...userData,[i]:''})
+          window.alert("Invalid Phone Number");
+          return 1;
+        }
+      }
+      else if (i === "password") {
+        if(!validator.isStrongPassword(userData[i.toString()])) {
+          setUserData({...userData,[i]:''})
+          window.alert("Please create a stronger Password");
+          return 1;
+        }
+      }
+      else if (i === "conf_pass") {
+        if(userData[i.toString()] !== userData["password"]) {
+          setUserData({...userData,[i]:''})
+          window.alert("Passwords do not match!");
+          return 1;
+        }
+      }
+
+    }
+    return 0; 
+
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission - you can perform validation and send data to the server here
-    console.log(userData);
-    alert("Successfully Registered!!!");
-    window.location.replace("/login");
+    if(!validateForm(e)){
+      const response = await fetch("http://localhost:5000/add_patient",{
+        method: "POST",
+        headers: {
+          'Content-Type' : 'Registered User'
+        },
+        body: JSON.stringify(userData)
+      })
+      .catch(error => console.log(error))
+      if (response.ok) {
+        alert("Successfully Registered!!!");
+        window.location.replace("/login");
+      } 
+
+      else {
+        alert("We cannot register at this time please try again");
+      }
+    }
   };
 
   return (
@@ -73,12 +96,12 @@ const RegistrationForm = () => {
         <br />
         <label>
           Email:
-          <input type="email" name="email" value={userData.email} onChange={handleChange} />
+          <input type="email" name="email" value={userData.email}  onChange={handleChange} />
         </label>
         <br />
         <label>
           Address:
-          <input type="text" name="address" value={userData.address} onChange={handleChange} />
+          <input type="text" name="address" value={userData.address}  onChange={handleChange} />
         </label>
         <br />
         <label>
@@ -88,7 +111,7 @@ const RegistrationForm = () => {
         <br />
         <label>
           Password:
-          <input type="password" name="password" value={userData.password} onChange={handleChange} />
+          <input type="password" name="password" value={userData.password}  onChange={handleChange} />
         </label>
         <label>
           Confirm Password:
