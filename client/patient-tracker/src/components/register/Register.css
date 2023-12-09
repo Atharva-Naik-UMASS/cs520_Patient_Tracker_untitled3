@@ -1,0 +1,118 @@
+@media all and (min-width: 480px) {
+    .Register {
+      padding: 100px 100px;
+      background-image: url("./register.jpg");
+    }
+    .Register h2 {
+        text-align: center;
+        color: white;
+        margin: -10px 0;
+    }
+  
+    /* .Register form {
+      margin: 0 auto;
+      max-width: 480px;
+    }
+  } */
+  
+  /* .wrapper {
+  
+      padding: 20px;
+  
+  }
+  
+  .Register {
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  .main-buttons {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .h2 {
+    align-items: center;
+    margin: 0px;
+  }
+  button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  } */
+  
+  .box{
+    width: 500px;
+    height: 400px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:white;
+    text-align: center;
+  }
+  .box h1{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .box input[type = "text"],.box input[type = "number"],.box input[type = "email"], .box input[type = "password"]{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 100px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.5s;
+  }
+  .box input[type = "text"]:focus,.box input[type = "number"]:focus,.box input[type = "email"]:focus, input[type = "password"]:focus{
+    width: 200px;
+    border-color: #2ecc71;
+  }
+  .submit{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s;
+  }
+  .submit:hover{
+    background: #2ecc71;
+    cursor: pointer;
+  }
+  .button{
+    color: black;
+    background: #2ecc71;
+    border: 2px solid #2ecc71;
+    transition: 0.25s
+  }
+  .button:hover{
+    background: #3edc81;
+    cursor: pointer;
+  }
+  .submit-success[data-submit="Patient Registered Successfully"]{
+    display: block;
+  }
+}
