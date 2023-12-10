@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faUser} from '@fortawesome/free-solid-svg-icons'
+import "./schedule_appointment.css"
 
 const AppointmentForm = ({ onSubmit }) => {
   const [doctorName, setDoctorName] = useState('');
@@ -9,6 +12,8 @@ const AppointmentForm = ({ onSubmit }) => {
     e.preventDefault();
     onSubmit({ doctorName, appointmentDate, appointmentTime });
   };
+
+
 
   const doctorNames = ['Dr. John', 'Dr. Macy', 'Dr. Shepard'];
 
@@ -64,7 +69,10 @@ const AppointmentBookingPage = () => {
 
   return (
     <div>
-      <h1>Book an Appointment</h1>
+      <nav className="navbar">
+        <button class="right"><FontAwesomeIcon icon={faUser}></FontAwesomeIcon> Profile</button>
+      </nav>
+      <h1>Book Appointment</h1>
       <AppointmentForm onSubmit={handleFormSubmit} />
     </div>
   );
