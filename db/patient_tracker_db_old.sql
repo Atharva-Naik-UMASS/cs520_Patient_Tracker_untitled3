@@ -157,9 +157,9 @@ CREATE TABLE public.employee (
     employee_id bigint NOT NULL,
     job_id bigint NOT NULL,
     emp_phno bigint NOT NULL,
+    emp_email character varying(50)[] NOT NULL,
     emp_emergency_contact bigint NOT NULL,
-    emp_password character varying(256) NOT NULL,
-    emp_email character varying(100) NOT NULL
+    emp_password character varying(256) NOT NULL
 );
 
 
@@ -185,8 +185,8 @@ ALTER TABLE public.employee ALTER COLUMN employee_id ADD GENERATED ALWAYS AS IDE
 
 CREATE TABLE public.jobs (
     job_id bigint NOT NULL,
-    department_id bigint,
-    job_name character varying(50) NOT NULL
+    job_name character varying(50)[] NOT NULL,
+    department_id bigint
 );
 
 
@@ -214,10 +214,7 @@ CREATE TABLE public.patient (
     patient_id bigint NOT NULL,
     patient_email character varying(50) NOT NULL,
     patient_password character varying(256) NOT NULL,
-    patient_emergency_contact bigint,
-    patient_name character varying(100) NOT NULL,
-    patient_dob date NOT NULL,
-    patient_phno bigint NOT NULL
+    patient_emergency_contact bigint
 );
 
 
@@ -329,161 +326,6 @@ ALTER TABLE public.tests ALTER COLUMN test_id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Data for Name: admit_archive; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.admit_archive (admit_id, patient_id, doc_id, department_id, admit_time, discharge_time, doctor_notes, prescriptions, follow_up) FROM stdin;
-\.
-
-
---
--- Data for Name: admitted; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.admitted (admit_id, patient_id, doc_id, department_id, admit_time) FROM stdin;
-\.
-
-
---
--- Data for Name: clinic_archive; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.clinic_archive (clinic_id, doc_id, patient_id, department_id, date_time, doctors_notes, prescription, follow_up) FROM stdin;
-\.
-
-
---
--- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.department (department_id, department_name) FROM stdin;
-1	Administration
-\.
-
-
---
--- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.employee (employee_id, job_id, emp_phno, emp_emergency_contact, emp_password, emp_email) FROM stdin;
-1	1	4134661234	4134660000	admin	admin@hospital.com
-3	1	4134666789	4134666780	admin2	admin2@hospital.com
-\.
-
-
---
--- Data for Name: jobs; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.jobs (job_id, department_id, job_name) FROM stdin;
-1	1	Admin
-\.
-
-
---
--- Data for Name: patient; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.patient (patient_id, patient_email, patient_password, patient_emergency_contact, patient_name, patient_dob, patient_phno) FROM stdin;
-\.
-
-
---
--- Data for Name: scheduled_clinic_hours; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.scheduled_clinic_hours (clinic_id, doc_id, patient_id, sched_start_time, department_id) FROM stdin;
-\.
-
-
---
--- Data for Name: test_archive; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.test_archive (order_id, test_id, doc_id, patient_id, conducter_id, ordered_time, results_delivered_time, ishigh_priority, test_report) FROM stdin;
-\.
-
-
---
--- Data for Name: test_schedule; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.test_schedule (order_id, ordered_doc_id, patient_id, test_id, conducter_id, ordered_time, is_priority) FROM stdin;
-\.
-
-
---
--- Data for Name: tests; Type: TABLE DATA; Schema: public; Owner: atharva
---
-
-COPY public.tests (test_id, test_name) FROM stdin;
-\.
-
-
---
--- Name: admit_archive_admit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.admit_archive_admit_id_seq', 1, false);
-
-
---
--- Name: admitted_admit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.admitted_admit_id_seq', 1, false);
-
-
---
--- Name: clinic_archive_clinic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.clinic_archive_clinic_id_seq', 1, false);
-
-
---
--- Name: department_department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.department_department_id_seq', 1, true);
-
-
---
--- Name: employee_employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.employee_employee_id_seq', 4, true);
-
-
---
--- Name: jobs_job_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.jobs_job_id_seq', 1, true);
-
-
---
--- Name: patient_patient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.patient_patient_id_seq', 6, true);
-
-
---
--- Name: scheduled_clinic_hours_clinic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.scheduled_clinic_hours_clinic_id_seq', 1, false);
-
-
---
--- Name: tests_test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: atharva
---
-
-SELECT pg_catalog.setval('public.tests_test_id_seq', 1, false);
-
-
---
 -- Name: admit_archive admit_archive_pkey; Type: CONSTRAINT; Schema: public; Owner: atharva
 --
 
@@ -553,14 +395,6 @@ ALTER TABLE ONLY public.jobs
 
 ALTER TABLE ONLY public.jobs
     ADD CONSTRAINT jobs_pkey PRIMARY KEY (job_id);
-
-
---
--- Name: patient patient_patient_email_key; Type: CONSTRAINT; Schema: public; Owner: atharva
---
-
-ALTER TABLE ONLY public.patient
-    ADD CONSTRAINT patient_patient_email_key UNIQUE (patient_email);
 
 
 --
