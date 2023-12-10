@@ -1,7 +1,7 @@
 // RegistrationForm.js
 import React, { useState } from 'react';
-import validator from 'validator' 
-import "./Register.css"
+import validator from 'validator';
+import "./Register.css";
 
 const RegistrationForm = () => {
   const [userData, setUserData] = useState({
@@ -63,12 +63,16 @@ const RegistrationForm = () => {
     if(!validateForm(e)){
       const response = await fetch("http://localhost:5000/add_patient",{
         method: "POST",
+        mode : "cors",
         headers: {
-          'Content-Type' : 'Registered User'
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Origin':'http://127.0.0.1:5000',
+          'Access-Control-Allow-Methods':'POST,GET,OPTIONS',
+          'Access-Control-Allow-Headers': '*'
         },
         body: JSON.stringify(userData)
-      })
-      .catch(error => console.log(error))
+      }).catch(error => console.log(error))
       if (response.ok) {
         alert("Successfully Registered!!!");
         window.location.replace("/login");
