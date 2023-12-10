@@ -1,0 +1,7 @@
+.cert
+.idea
+node_modules
+package-lock.json
+backend/__pycache__/
+client/patient-tracker/package-lock.json
+client/patient-tracker/yarn.lock
