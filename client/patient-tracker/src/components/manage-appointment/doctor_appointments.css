@@ -1,0 +1,54 @@
+.calendar-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .calendar-container {
+    /* border: 1px solid #ccc; */
+
+    /* background-color: #f9f9f9; */
+    max-width: 600px; /* Set a maximum width for the calendar */
+    width: 100%; /* Ensure the container takes up available width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .appointments-container {
+    /* border: 1px solid #ca2c2c; */
+    padding: 20px;
+    min-height: 200px;
+  }
+
+  
+  /* Add more custom styles as per your design */
+  .react-calendar__tile {
+    padding: 0.75em;
+    /* background-color: #f5f2f2; */
+    border-radius: 4px;
+  }
+  
+  .react-calendar__month-view__days__day {
+    min-height: 2em;
+    color: black;
+  }
+
+.react-calendar__navigation {
+    align-items: center;
+}
+
+.react-calendar__navigation__arrow {
+    background-color: #007bff;
+
+}
+
+.react-calendar__navigation__label {
+    color: black;
+    background-color: #54bbe0;
+
+}
+
+.react-calendar__navigation {
+    background-color: #5491e0;
+  }
