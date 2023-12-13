@@ -22,9 +22,30 @@ export default function Login() {
 
   }
 
-  function handleSubmit(event,page) {
-    event.preventDefault();
-    window.location.replace(page)
+  async function handleSubmit(e,page) {
+//  alert(page)
+     e.preventDefault();
+    // Handle form submission - you can perform validation and send data to the server here
+    const response = await fetch("http://localhost:5000/login",{
+      method: "POST",
+      mode : "cors",
+      headers: {
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Origin':'http://127.0.0.1:5000',
+        'Access-Control-Allow-Methods':'POST,GET,OPTIONS',
+        'Access-Control-Allow-Headers': '*'
+      },
+      body: JSON.stringify({"email":email,"password":password, "type":page})
+    }).catch(error => console.log(error))
+    if (response.ok) {
+      alert("Successfully Authenticated!!!");
+      window.location.replace(page);
+    }
+
+    else {
+      alert("We cannot login at this time please try again");
+    }
   }
 
   return (
@@ -70,7 +91,7 @@ export default function Login() {
         </Form.Group>
         <br/>
         {/* <Link to="/signup" className="btn btn-primary">Sign up</Link> */}
-        <button class="main-buttons" block size="lg" type="submit" variant="primary" onClick={e => handleSubmit(e,"/doctor_dashboard")} disabled={!validateForm()} >
+        <button class="main-buttons" block size="lg" type="submit" variant="primary" onClick={e => handleSubmit(e,"/doctor_dashboard")}>
 
           Login as Doctor
 
@@ -78,7 +99,7 @@ export default function Login() {
 
         <br/>
         <br/>
-        <button class="main-buttons" block size="lg" type="submit" variant="primary"  onClick={e => handleSubmit(e,"/patient_dashboard")} disabled={!validateForm()}>
+        <button class="main-buttons" block size="lg" type="submit" variant="primary"  onClick={e => handleSubmit(e,"/patient_dashboard")}>
 
           Login as Patient
 
