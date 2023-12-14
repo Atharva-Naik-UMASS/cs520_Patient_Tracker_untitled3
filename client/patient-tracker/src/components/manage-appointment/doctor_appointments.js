@@ -54,7 +54,7 @@ const AppointmentsPage = () => {
     <div className="container mt-4">
       <h1 className="text-center mb-4">Appointments</h1>
       <div className="row">
-        <div className="calendar-page col-md-1 mb-1">
+        <div className="calendar-page col-md-12 mb-1">
           <div className="calendar-container">
             <Calendar onChange={handleDateChange} value={selectedDate} />
           </div>
