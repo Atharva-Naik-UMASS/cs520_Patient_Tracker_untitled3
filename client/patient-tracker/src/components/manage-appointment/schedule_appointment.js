@@ -2,20 +2,54 @@ import React, { useState } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUser} from '@fortawesome/free-solid-svg-icons'
 import "./schedule_appointment.css"
+import getPatientName from '../login/login.js'
+import { ReactSession } from 'react-client-session';
 
 const AppointmentForm = ({ onSubmit }) => {
   const [doctorName, setDoctorName] = useState('');
+  const [doctorNames, setDoctorNames] = useState([]);
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ doctorName, appointmentDate, appointmentTime });
+  const patient = ReactSession.get("patient_name");
+  const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch("http://localhost:5000/schedule_appointment",{
+                method: "POST",
+                mode : "cors",
+                headers: {
+                  'Content-Type' : 'application/json',
+                  'Access-Control-Allow-Credentials': 'true',
+                  'Access-Control-Allow-Origin':'http://127.0.0.1:5000',
+                  'Access-Control-Allow-Methods':'POST,GET,OPTIONS',
+                  'Access-Control-Allow-Headers': '*'
+                },
+                body: JSON.stringify({"doctor":doctorName,"date":appointmentDate,"time":appointmentTime,"patient":patient})
+              }).catch(error => console.log(error))
+              if (response.ok) {
+                alert("Successfully Scheduled!!!");
+                window.location.replace("/patient_dashboard");
+              }
+
+              else {
+                alert("This time slot is not available");
+              }
   };
 
+window.onload = async function() {
+    const app_info = await fetch("http://localhost:5000/get_docs",{
+                method: 'GET',
+                mode : "cors",
+                headers: {
+                  'Access-Control-Allow-Credentials': 'true',
+                  'Access-Control-Allow-Origin':'http://127.0.0.1:5000',
+                  'Access-Control-Allow-Methods':'GET,OPTIONS'
+                },
+              }
+            ).then((response) => response.json())
+            .then((data) => data);
+    setDoctorNames(app_info);
 
-
-  const doctorNames = ['Dr. John', 'Dr. Macy', 'Dr. Shepard'];
+}
 
   return (
     <div className="formbold-main-wrapper">

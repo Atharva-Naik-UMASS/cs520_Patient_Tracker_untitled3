@@ -11,8 +11,10 @@ import {
     Route,
     Navigate,
 } from "react-router-dom";
+import { ReactSession } from 'react-client-session';
 
 export default function App() {
+    ReactSession.setStoreType("localStorage");
     return (
         <>
             <Router>

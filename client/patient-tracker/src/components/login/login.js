@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import "./Login.css";
+import { ReactSession } from 'react-client-session';
 
 export default function Login() {
 
@@ -39,8 +40,16 @@ export default function Login() {
       body: JSON.stringify({"email":email,"password":password, "type":page})
     }).catch(error => console.log(error))
     if (response.ok) {
-      alert("Successfully Authenticated!!!");
-      window.location.replace(page);
+      if (page === "/patient_dashboard"){
+          const name = await response.json().then(n => n['name']);
+          ReactSession.set("patient_name",name);
+          alert("Successfully Authenticated!!!");
+          window.location.replace("/patient_dashboard");
+      }
+      else {
+          alert("Successfully Authenticated!!!");
+          window.location.replace(page);
+      }
     }
 
     else {

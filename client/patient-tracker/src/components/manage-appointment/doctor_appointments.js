@@ -27,7 +27,6 @@ const AppointmentsPage = () => {
         ).then((response) => response.json())
         .then((data) => data);
        if (app_info.length>0) {
-//            console.log(apps);
             const appointments = getFormattedAppointment(app_info);
             setAppointments(appointments);
        }
@@ -50,24 +49,6 @@ const AppointmentsPage = () => {
     const formatTime = time => {
           return `${String(time.getHours())}:${String(time.getMinutes() + 1)}`;
      };
-
-  const dummyAppointments = [
-    {
-      id: 1,
-      date: '2023-12-15',
-      patientName: 'John Doe',
-      description: 'Routine checkup',
-      // Add more appointment details as needed
-    },
-    {
-      id: 2,
-      date: '2023-12-18',
-      patientName: 'Jane Smith',
-      description: 'Follow-up visit',
-      // Add more appointment details as needed
-    },
-    // Add more dummy appointments here if needed
-  ];
 
   return (
     <div className="container mt-4">
