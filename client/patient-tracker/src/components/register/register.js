@@ -13,16 +13,11 @@ const RegistrationForm = () => {
     password:'',
     conf_pass:''
   });
-  var hist = '';
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
-  // var flag = 0
-
-  // const handleBlur = (e) => {
-     
-  // }
 
   const validateForm = (e) => {
     for (var i in userData){
@@ -76,7 +71,7 @@ const RegistrationForm = () => {
       if (response.ok) {
         alert("Successfully Registered!!!");
         window.location.replace("/login");
-      } 
+      }
 
       else {
         alert("We cannot register at this time please try again");
