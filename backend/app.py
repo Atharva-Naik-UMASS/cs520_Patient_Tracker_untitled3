@@ -1,4 +1,6 @@
 import os
+
+import flask
 import psycopg2
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
@@ -151,6 +153,31 @@ def login():
             return "Authentication failed", 400
     except:
         return "Authentication failed", 400
+
+    finally:
+        # close the cursor and connection
+        cur.close()
+        conn.close()
+
+
+@app.route('/get_appointment', methods=['GET', 'OPTIONS'])
+@cross_origin()
+def get_appointment():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    date = request.args.get('date')
+    try:
+        cur.execute('''SELECT patient.patient_name, scheduled_clinic_hours.sched_start_time 
+        FROM scheduled_clinic_hours 
+        JOIN patient
+        ON patient.patient_id = scheduled_clinic_hours.patient_id
+        WHERE sched_start_time ::date 
+        = %s''', (date,))
+        appointments = cur.fetchall()
+        return appointments, 200
+
+    except:
+        return "Error", 400
 
     finally:
         # close the cursor and connection
