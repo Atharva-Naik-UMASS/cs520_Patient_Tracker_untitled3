@@ -3,6 +3,15 @@ from backend import connection
 
 
 def get_all_employees():
+    """
+    Retrieve all employees from the database.
+
+    This function establishes a database connection, fetches all employee records,
+    and returns a list of employees along with an HTTP status code.
+
+    Returns:
+        tuple: A tuple containing a list of all employees and an HTTP status code (200 - OK).
+    """
     conn = connection.get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM public.employee;')
@@ -13,39 +22,17 @@ def get_all_employees():
     return employees, 200
 
 
-def add_employee():
-    conn = connection.get_db_connection()
-    cur = conn.cursor()
-    try:
-        # Get the data from the form
-        job_id = request.form['job_id']
-        emp_phno = request.form['emp_phno']
-        emp_emergency_contact = request.form['emp_emergency_contact']
-        emp_password = request.form['emp_password']
-        emp_email = request.form['emp_email']
-
-        # Insert the data into the table
-        emp = cur.execute(
-            '''INSERT INTO employee
-            (job_id, emp_phno, emp_emergency_contact, emp_password, emp_email) VALUES (%s, %s, %s, %s, %s)''',
-            (job_id, emp_phno, emp_emergency_contact, emp_password, emp_email))
-
-        print(emp)
-
-        # commit the changes
-        conn.commit()
-        # close the cursor and connection
-        cur.close()
-        conn.close()
-        return "Employee added successfully", 200
-    except:
-        # close the cursor and connection
-        cur.close()
-        conn.close()
-        return "Error", 400
-
-
 def get_docs():
+    """
+    Retrieve doctors' names from the database.
+
+    This function establishes a database connection, retrieves names of employees
+    with the job_id indicating doctors, and returns a list of doctor names along
+    with an HTTP status code.
+
+    Returns:
+        tuple: A tuple containing a list of doctor names and an HTTP status code (200 - OK).
+    """
     conn = connection.get_db_connection()
     cur = conn.cursor()
 

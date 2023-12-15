@@ -1,0 +1,16 @@
+Endpoints
+
+Employee
+GET /get_all_employees - Retrieves a list of all employees
+GET /get_docs - Retrieves a list of doctors
+
+Patient
+GET /get_patients - Retrieves a list of all patients
+POST /add_patient - Creates a new patient
+
+Login
+POST /login - Authenticates users
+
+Appointments
+GET /get_appointment?date={date} - Retrieves appointments for a particular date
+POST /schedule_appointment - Creates a new appointment

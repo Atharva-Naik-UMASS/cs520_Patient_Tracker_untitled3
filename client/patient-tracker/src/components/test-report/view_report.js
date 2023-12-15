@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
-import johnDoeReport from 'c:/Users/rachn/OneDrive/Documents/SEM 1/CS 520/project/cs520_Patient_Tracker_untitled3/client/patient-tracker/src/components/test-report/John_Doe_CBC-sample-report-with-notes_0.pdf';
-import janeSmithReport from 'c:/Users/rachn/OneDrive/Documents/SEM 1/CS 520/project/cs520_Patient_Tracker_untitled3/client/patient-tracker/src/components/test-report/Jane_Smith_abdomen-mri-with-contrast-sample-report-1.pdf';
+import johnDoeReport from './John_Doe_CBC-sample-report-with-notes_0.pdf';
+import janeSmithReport from './Jane_Smith_abdomen-mri-with-contrast-sample-report-1.pdf';
 
 import "./view_report.css" // Import your custom CSS file for styling
 

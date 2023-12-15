@@ -3,6 +3,16 @@ from backend import connection
 
 
 def set_appointment():
+    """
+    Set an appointment for a patient with a doctor.
+
+    This function retrieves information from the request JSON data,
+    schedules an appointment in the database, and returns a message
+    indicating whether the appointment was successfully scheduled or not.
+
+    Returns:
+        str: A message indicating success or failure of the appointment scheduling.
+    """
     conn = connection.get_db_connection()
     cur = conn.cursor()
     try:
@@ -48,6 +58,15 @@ def set_appointment():
 
 
 def get_appointment():
+    """
+    Retrieve appointments for a specific date.
+
+    This function takes a date parameter from the request arguments
+    and fetches appointments scheduled for that particular date.
+
+    Returns:
+        tuple: A tuple containing appointment details (patient name and appointment time).
+    """
     conn = connection.get_db_connection()
     cur = conn.cursor()
     date = request.args.get('date')

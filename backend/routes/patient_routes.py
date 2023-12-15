@@ -3,6 +3,17 @@ from backend import connection
 
 
 def register_patient():
+    """
+    Register a new patient in the database.
+
+    This function takes patient information from the request JSON data,
+    including email, password, and emergency contact, and inserts it into
+    the 'patient' table in the database.
+
+    Returns:
+        str: A message indicating the success or failure of patient registration.
+             It returns an HTTP status code (200 - OK or 400 - Bad Request).
+    """
     conn = connection.get_db_connection()
     cur = conn.cursor()
     try:
@@ -30,6 +41,16 @@ def register_patient():
 
 
 def get_patient():
+    """
+    Retrieve all patients from the database.
+
+    This function fetches all patient records from the 'patient' table in the database.
+
+    Returns:
+        tuple: A tuple containing a list of all patients and an HTTP status code (200 - OK).
+               It returns an error message along with an HTTP status code (400 - Bad Request)
+               in case of an exception.
+    """
     conn = connection.get_db_connection()
     cur = conn.cursor()
     try:

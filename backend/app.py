@@ -16,11 +16,6 @@ def get_all_employees():
     return employee_routes.get_all_employees()
 
 
-@app.route('/add_employee', methods=['POST'])
-def add_employee():
-    return employee_routes.add_employee()
-
-
 @app.route('/add_patient', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def register_patient():
