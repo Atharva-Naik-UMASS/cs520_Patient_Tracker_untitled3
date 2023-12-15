@@ -74,6 +74,7 @@ window.onload = async function() {
           <div className="formbold-mb-5">
             <label htmlFor="date" className="formbold-form-label"> Appointment Date </label>
             <input
+            id="date"
               type="date"
               value={appointmentDate}
               onChange={(e) => setAppointmentDate(e.target.value)}
@@ -82,6 +83,7 @@ window.onload = async function() {
           <div className="formbold-mb-5">
             <label htmlFor="time" className="formbold-form-label"> Appointment Time </label>
             <input
+            id="time"
               type="time"
               value={appointmentTime}
               onChange={(e) => setAppointmentTime(e.target.value)}
